@@ -45,7 +45,7 @@ https://www.aclweb.org/anthology/C18-1314.pdf
 第一阶段测试中，该文件夹包含**两个**文件：
     <br/>``SMP-CAIL2021-text-test1.csv``：同下发数据中的``SMP-CAIL2021-text-train.csv``格式完全一致，共800篇裁判文书；
     <br/>``SMP-CAIL2021-test1.csv``：同下发数据中的``SMP-CAIL2021-train.csv``格式基本一致，但缺少选手``answer``维度数据。
-<br/>选手需要从将预测的结果输出到``/output/result.csv``中，以``csv``格式输出。输出文件中必须包含且只包含``id``和``answer``两个维度，可参考下发文件夹中``Sample_submission.csv``。
+<br/>选手需要从将预测的结果输出到``/output/result1.csv``中，以``csv``格式输出。输出文件中必须包含且只包含``id``和``answer``两个维度，可参考下发文件夹中``Sample_submission.csv``。
 
 以上为 ``main.py`` 中你需要实现的内容，你可以利用 ``python_example`` 下的文件进行进一步参考。**请注意**，在加载模型的时候请尽量使用相对路径，我们会将提交的压缩包解压到``/work``路径下然后运行。
 
