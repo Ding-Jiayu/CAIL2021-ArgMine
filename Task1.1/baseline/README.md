@@ -4,11 +4,6 @@
 
 ### 0. 预处理
 
-#### 0.0 下载本项目
-
-```
-git clone https://github.com/Ding-Jiayu/CAIL2021-ArgumentationUnderstanding/Task1.1/baseline.git
-```
 
 #### 0.1 安装依赖包
 
