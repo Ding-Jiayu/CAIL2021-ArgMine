@@ -67,8 +67,6 @@ python prepare.py
 ├── main.py
 ├── model.py
 ├── prepare.py
-├── result.py
-├── test.py
 ├── train.py
 ├── utils.py
 └── requirements.txt
@@ -132,8 +130,6 @@ python -m torch.distributed.launch train.py --config_file 'config/bert_config.js
 ├── main.py
 ├── model.py
 ├── prepare.py
-├── result.py
-├── test.py
 ├── train.py
 ├── utils.py
 └── requirements.txt
