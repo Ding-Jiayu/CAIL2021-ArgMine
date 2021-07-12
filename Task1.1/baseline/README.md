@@ -11,7 +11,7 @@
 pip install -r requirements.txt
 ```
 
-#### 0.2 下载数据集
+#### 0.2 数据集
 
 数据集下载请访问比赛[主页](http://cail.cipsc.org.cn/)。
 
