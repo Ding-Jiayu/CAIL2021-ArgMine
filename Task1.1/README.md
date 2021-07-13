@@ -22,7 +22,7 @@ QQ群：
 
 本任务第一阶段所下发的文件包含``SMP-CAIL2021-text-train.csv``,`` SMP-CAIL2021-train.csv``,``SMP-CAIL2021-text-test1.csv``,``SMP-CAIL2021-test1.csv``，分别包含以下内容：
 
-1. ``SMP-CAIL2021-text-train.csv``：包含了裁判文书所有对于辩诉双方辩护全文的数据，共2400篇裁判文书。分别包含以下维度：
+1. ``SMP-CAIL2021-text-train.csv``：包含了裁判文书所有对于辩诉双方辩护全文的数据。分别包含以下维度：
    	<br/>``sentence_id``： 句子id
    	<br/>``text_id``： 裁判文书id
    	<br/>``position``： 二分类标签：sc——诉方；bc——辩方
