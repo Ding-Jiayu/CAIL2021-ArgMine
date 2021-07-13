@@ -115,6 +115,7 @@ python -m torch.distributed.launch train.py --config_file 'config/bert_config.js
 │       │   ├── bert-8.bin
 │       │   ├── bert-9.bin
 │       │   └── bert-10.bin
+│       ├── model.bin
 │       ├── bert-base-chinese
 │       │   ├── config.json
 │       │   └── pytorch_model.bin
@@ -130,12 +131,26 @@ python -m torch.distributed.launch train.py --config_file 'config/bert_config.js
 └── requirements.txt
 ```
 
-### 2. 测试
+### 2. 模型预测
 
 `in_file`为待测试文件，`out_file`为输出文件。
 
 ```
 python main.py --model_config 'config/bert_config.json' \
+               --in_file 'SMP-CAIL2021-train.csv' \
+               --out_file 'bert-train-1.csv'
+```
+```
+python main.py --model_config 'config/bert_config.json' \
                --in_file 'SMP-CAIL2021-test1.csv' \
                --out_file 'bert-submission-test-1.csv'
+```
+
+### 3. 评估结果
+
+`golden_file`为带真实答案标签的文件，`predict_file`为待测试模型生成的结果文件。第一阶段仅提供训练集`SMP-CAIL2021-train.csv`的真实答案标签，测试集`SMP-CAIL2021-test1.csv`的真实答案标签暂不提供。运行结果输出Accuracy和F1分数。
+
+```
+python evaluate.py --golden_file 'SMP-CAIL2021-train.csv' \
+                   --predict_file 'bert-train-1.csv'
 ```
