@@ -17,7 +17,7 @@ pip install -r requirements.txt
 
 数据集下载请访问比赛[主页](http://cail.cipsc.org.cn/)。
 
-本项目中只使用了 `SMP-CAIL2021-train.csv`： 包含了【xxxx】对裁判文书中的互动论点对。分别包含以下维度：
+本项目中只使用了 `SMP-CAIL2021-train.csv`： 包含了2449对裁判文书中的互动论点对。分别包含以下维度：
 
   - `id`： 论点对id
   - `text_id`： 裁判文书id
