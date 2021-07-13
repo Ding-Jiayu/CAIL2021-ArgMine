@@ -8,7 +8,7 @@ import torch
 
 from tqdm import tqdm
 from sklearn import metrics
-
+import fire
 
 LABELS = ['1', '2', '3', '4', '5']
 
@@ -88,7 +88,10 @@ def evaluate(model, data_loader, device) -> List[str]:
     return answer_list
 
 
-if __name__ == '__main__':
-    acc, f1_score = eval_file(
-        'data/test-1.csv', 'bert-submission-test-1.csv')
+def main(golden_file='data/test-1.csv', predict_file='bert-submission-test-1.csv'):
+    acc, f1_score = eval_file(golden_file, predict_file)
     print("acc: {}, f1: {}".format(acc, f1_score))
+
+        
+if __name__ == '__main__':
+    fire.Fire(main)
