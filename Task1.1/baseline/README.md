@@ -7,6 +7,8 @@
 
 #### 0.1 安装依赖包
 
+我们使用的环境为`python 3.6.13`。
+
 ```
 pip install -r requirements.txt
 ```
