@@ -20,7 +20,7 @@ QQ群：
 
 ## 数据说明
 
-本任务第一阶段所下发的文件包含``SMP-CAIL2021-text-train.csv``,`` SMP-CAIL2021-train.csv``，分别包含以下内容：
+本任务第一阶段所下发的文件包含``SMP-CAIL2021-text-train.csv``,`` SMP-CAIL2021-train.csv``,``SMP-CAIL2021-text-test1.csv``,``SMP-CAIL2021-test1.csv``，分别包含以下内容：
 
 1. ``SMP-CAIL2021-text-train.csv``：包含了裁判文书所有对于辩诉双方辩护全文的数据，共2400篇裁判文书。分别包含以下维度：
    	<br/>``sentence_id``： 句子id
@@ -28,14 +28,15 @@ QQ群：
    	<br/>``position``： 二分类标签：sc——诉方；bc——辩方
    	<br/>``sentence``： 句子文本
 
-2. ``SMP-CAIL2021-train.csv``： 包含了【xxxx】对裁判文书中的互动论点对。分别包含以下维度：
+2. ``SMP-CAIL2021-train.csv``： 包含了2449对裁判文书中的互动论点对。分别包含以下维度：
     <br/>``id``： 论点对id
     <br/>``text_id``： 裁判文书id
     <br/>``sc``： 论点对中诉方论点
     <br/>``A/B/C/D/E``： 给出的五句候选辩方论点
     <br/>``answer``： 辩方正确论点
 
-实际测试数据与``SMP-CAIL2021-train.csv``格式大部分相同，但不包含``answer``字段。
+3. ``SMP-CAIL2021-text-test1.csv``：同下发数据中的``SMP-CAIL2021-text-train.csv``格式完全一致；
+4. ``SMP-CAIL2021-test1.csv``：同下发数据中的``SMP-CAIL2021-train.csv``格式基本一致，包含了815对裁判文书中的互动论点对，但缺少选手``answer``维度数据。
 
 ## 提交的文件格式及组织形式
 
@@ -45,10 +46,7 @@ QQ群：
 
 对于你的代码，你需要从``/input/``中读取数据进行预测。
 
-第一阶段测试中，该文件夹包含**两个**文件：
-    <br/>``SMP-CAIL2021-text-test1.csv``：同下发数据中的``SMP-CAIL2021-text-train.csv``格式完全一致，共800篇裁判文书；
-    <br/>``SMP-CAIL2021-test1.csv``：同下发数据中的``SMP-CAIL2021-train.csv``格式基本一致，但缺少选手``answer``维度数据。
-<br/>选手需要从将预测的结果输出到``/output/result1.csv``中，以``csv``格式输出。输出文件中必须包含且只包含``id``和``answer``两个维度，可参考下发文件夹中``Sample_submission.csv``。
+第一阶段测试中，该文件夹包含**两个**文件：``SMP-CAIL2021-text-test1.csv``和``SMP-CAIL2021-test1.csv``。选手需要从将预测的结果输出到``/output/result1.csv``中，以``csv``格式输出。输出文件中必须包含且只包含``id``和``answer``两个维度，可参考下发文件夹中``Sample_submission.csv``。
 
 以上为 ``main.py`` 中你需要实现的内容，你可以利用 ``python_example`` 下的文件进行进一步参考。**请注意**，在加载模型的时候请尽量使用相对路径，我们会将提交的压缩包解压到``/work``路径下然后运行。
 
