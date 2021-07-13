@@ -8,7 +8,7 @@ Used for SMP-CAIL2021-ArgumentationUnderstanding Task1.1.
 import torch
 from torch import nn
 from torch.nn.utils.rnn import pack_padded_sequence, PackedSequence
-from transformers.modeling_bert import BertModel
+from transformers.models.bert.modeling_bert import BertModel
 
 
 class BertForClassification(nn.Module):
