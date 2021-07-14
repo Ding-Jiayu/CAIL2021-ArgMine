@@ -43,6 +43,7 @@ def main(in_file='data/SMP-CAIL2021-test1.csv',
     else:
         device = torch.device('cpu')
     # 1. Load data
+    in_file=os.path.join('data',in_file)
     data = Data(vocab_file=os.path.join(config.model_path, 'vocab.txt'),
                 max_seq_len=config.max_seq_len,
                 model_type=config.model_type)
