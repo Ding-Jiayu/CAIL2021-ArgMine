@@ -1,4 +1,4 @@
-"""Data processor for SMP-CAIL2020-Argmine.
+"""Data processor for SMP-CAIL2021-ArgumentationUnderstanding Task1.1.
 
 Author: Yixu GAO (yxgao19@fudan.edu.cn)
 
@@ -7,123 +7,53 @@ The data processor convert each line into 5 samples,
 each sample with 1 sc sentence and 1 bc sentence.
 
 Usage:
-1. Tokenizer (used for RNN model):
-    from data import Tokenizer
-    vocab_file = 'vocab.txt'
-    sentence = '我饿了，想吃东西了。'
-    tokenizer = Tokenizer(vocab_file)
-    tokens = tokenizer.tokenize(sentence)
-    # ['我', '饿', '了', '，', '想', '吃', '东西', '了', '。']
-    ids = tokenizer.convert_tokens_to_ids(tokens)
-2. Data:
     from data import Data
     # For training, load train and valid set
     # For BERT model
     data = Data('model/bert/vocab.txt', model_type='bert')
     datasets = data.load_train_and_valid_files(
-        'SMP-CAIL2020-train.csv', 'SMP-CAIL2020-valid.csv')
-    train_set, valid_set_train, valid_set_valid = datasets
-    # For RNN model
-    data = Data('model/rnn/vocab.txt', model_type='rnn')
-    datasets = data.load_all_files(
-        'SMP-CAIL2020-train.csv', 'SMP-CAIL2020-valid.csv')
+        'SMP-CAIL2021-train.csv', 'SMP-CAIL2021-valid.csv')
     train_set, valid_set_train, valid_set_valid = datasets
     # For testing, load test set
     data = Data('model/bert/vocab.txt', model_type='bert')
-    test_set = data.load_file('SMP-CAIL2020-test.csv', train=False)
+    test_set = data.load_file('SMP-CAIL2021-test.csv', train=False)
 """
+
 from typing import List
 import jieba
 import torch
-
 import pandas as pd
-
 from torch.utils.data import TensorDataset
 from transformers import BertTokenizer
 from tqdm import tqdm
 
 
-class Tokenizer:
-    """Tokenizer for Chinese given vocab.txt.
-
-    Attributes:
-        dictionary: Dict[str, int], {<word>: <index>}
-    """
-    def __init__(self, vocab_file='vocab.txt'):
-        """Initialize and build dictionary.
-
-        Args:
-            vocab_file: one word each line
-        """
-        self.dictionary = {'[PAD]': 0, '[UNK]': 1}
-        count = 2
-        with open(vocab_file, encoding='utf-8') as fin:
-            for line in fin:
-                word = line.strip()
-                self.dictionary[word] = count
-                count += 1
-
-    def __len__(self):
-        return len(self.dictionary)
-
-    @staticmethod
-    def tokenize(sentence: str) -> List[str]:
-        """Cut words for a sentence.
-
-        Args:
-            sentence: sentence
-
-        Returns:
-            words list
-        """
-        return jieba.lcut(sentence)
-
-    def convert_tokens_to_ids(
-            self, tokens_list: List[str]) -> List[int]:
-        """Convert tokens to ids.
-
-        Args:
-            tokens_list: word list
-
-        Returns:
-            index list
-        """
-        return [self.dictionary.get(w, 1) for w in tokens_list]
-
-
 class Data:
-    """Data processor for BERT and RNN model for SMP-CAIL2020-Argmine.
+    """Data processor for BERT baseline model for SMP-CAIL2021-ArgumentationUnderstanding Task1.1.
 
     Attributes:
-        model_type: 'bert' or 'rnn'
+        model_type: 'bert'
         max_seq_len: int, default: 512
         tokenizer:  BertTokenizer for bert
-                    Tokenizer for rnn
     """
     def __init__(self,
                  vocab_file='',
                  max_seq_len: int = 512,
                  model_type: str = 'bert'):
-        """Initialize data processor for SMP-CAIL2020-Argmine.
-
+        """Initialize data processor for SMP-CAIL2021-Argmine.
         Args:
             vocab_file: one word each line
             max_seq_len: max sequence length, default: 512
-            model_type: 'bert' or 'rnn'
-                If model_type == 'bert', use BertTokenizer as tokenizer
-                Otherwise, use Tokenizer as tokenizer
+            model_type: 'bert'
         """
         self.model_type = model_type
-        if self.model_type == 'bert':
-            self.tokenizer = BertTokenizer(vocab_file)
-        else:  # rnn
-            self.tokenizer = Tokenizer(vocab_file)
+        self.tokenizer = BertTokenizer(vocab_file)
         self.max_seq_len = max_seq_len
 
     def load_file(self,
-                  file_path='SMP-CAIL2020-train.csv',
+                  file_path='SMP-CAIL2021-train.csv',
                   train=True) -> TensorDataset:
-        """Load SMP-CAIL2020-Argmine train file and construct TensorDataset.
+        """Load train file and construct TensorDataset.
 
         Args:
             file_path: train file with last column as label
@@ -139,28 +69,17 @@ class Data:
             Test:
                 torch.utils.data.TensorDataset
                     each record: (input_ids, input_mask, segment_ids)
-            RNN model:
-            Train:
-                torch.utils.data.TensorDataset
-                    each record: (s1_ids, s2_ids, s1_length, s2_length, label)
-            Test:
-                torch.utils.data.TensorDataset
-                    each record: (s1_ids, s2_ids, s1_length, s2_length)
         """
         sc_list, bc_list, label_list = self._load_file(file_path, train)
-        if self.model_type == 'bert':
-            dataset = self._convert_sentence_pair_to_bert_dataset(
-                sc_list, bc_list, label_list)
-        else:  # rnn
-            dataset = self._convert_sentence_pair_to_rnn_dataset(
+        dataset = self._convert_sentence_pair_to_bert_dataset(
                 sc_list, bc_list, label_list)
         return dataset
 
     def load_train_and_valid_files(self, train_file, valid_file):
-        """Load all files for SMP-CAIL2020-Argmine.
+        """Load all files for SMP-CAIL2021-ArgumentationUnderstanding Task1.1.
 
         Args:
-            train_file, valid_file: files for SMP-CAIL2020-Argmine
+            train_file, valid_file: files for SMP-CAIL2021-ArgumentationUnderstanding Task1.1.
 
         Returns:
             train_set, valid_set_train, valid_set_valid
@@ -178,14 +97,14 @@ class Data:
         return train_set, valid_set_train, valid_set_valid
 
     def _load_file(self, filename, train: bool = True):
-        """Load SMP-CAIL2020-Argmine train/test file.
+        """Load train/test file.
 
         For train file,
         The ratio between positive samples and negative samples is 1:4
         Copy positive 3 times so that positive:negative = 1:1
 
         Args:
-            filename: SMP-CAIL2020-Argmine file
+            filename: SMP-CAIL2021-ArgumentationUnderstanding file
             train:
                 If True, train file with last column as label
                 Otherwise, test file without last column as label
@@ -265,67 +184,14 @@ class Data:
         return TensorDataset(
             all_input_ids, all_input_mask, all_segment_ids)
 
-    def _convert_sentence_pair_to_rnn_dataset(
-            self, s1_list, s2_list, label_list=None):
-        """Convert sentences pairs to dataset for RNN model.
-
-        Args:
-            sc_list, bc_list: List[List[str]], list of word tokens list
-            label_list: train: List[int], list of labels
-                        test: []
-
-        Returns:
-            Train:
-            torch.utils.data.TensorDataset
-                each record: (s1_ids, s2_ids, s1_length, s2_length, label)
-            Test:
-            torch.utils.data.TensorDataset
-                each record: (s1_ids, s2_ids, s1_length, s2_length, label)
-        """
-        all_s1_ids, all_s2_ids = [], []
-        all_s1_lengths, all_s2_lengths = [], []
-        for i in tqdm(range(len(s1_list)), ncols=80):
-            tokens_s1, tokens_s2 = s1_list[i], s2_list[i]
-            all_s1_lengths.append(min(len(tokens_s1), self.max_seq_len))
-            all_s2_lengths.append(min(len(tokens_s2), self.max_seq_len))
-            if len(tokens_s1) > self.max_seq_len:
-                tokens_s1 = tokens_s1[:self.max_seq_len]
-            if len(tokens_s2) > self.max_seq_len:
-                tokens_s2 = tokens_s2[:self.max_seq_len]
-            s1_ids = self.tokenizer.convert_tokens_to_ids(tokens_s1)
-            s2_ids = self.tokenizer.convert_tokens_to_ids(tokens_s2)
-            if len(s1_ids) < self.max_seq_len:
-                s1_ids += [0] * (self.max_seq_len - len(s1_ids))
-            if len(s2_ids) < self.max_seq_len:
-                s2_ids += [0] * (self.max_seq_len - len(s2_ids))
-            all_s1_ids.append(s1_ids)
-            all_s2_ids.append(s2_ids)
-        all_s1_ids = torch.tensor(all_s1_ids, dtype=torch.long)
-        all_s2_ids = torch.tensor(all_s2_ids, dtype=torch.long)
-        all_s1_lengths = torch.tensor(all_s1_lengths, dtype=torch.long)
-        all_s2_lengths = torch.tensor(all_s2_lengths, dtype=torch.long)
-        if label_list:  # train
-            all_label_ids = torch.tensor(label_list, dtype=torch.long)
-            return TensorDataset(
-                all_s1_ids, all_s2_ids, all_s1_lengths, all_s2_lengths,
-                all_label_ids)
-        # test
-        return TensorDataset(
-            all_s1_ids, all_s2_ids, all_s1_lengths, all_s2_lengths)
-
 
 def test_data():
     """Test for data module."""
     # For BERT model
     data = Data('model/bert/vocab.txt', model_type='bert')
     _, _, _ = data.load_train_and_valid_files(
-        'SMP-CAIL2020-train.csv',
-        'SMP-CAIL2020-test1.csv')
-    # For RNN model
-    data = Data('model/rnn/vocab.txt', model_type='rnn')
-    _, _, _ = data.load_train_and_valid_files(
-        'SMP-CAIL2020-train.csv',
-        'SMP-CAIL2020-test1.csv')
+        'SMP-CAIL2021-train.csv',
+        'SMP-CAIL2021-test1.csv')
 
 
 if __name__ == '__main__':

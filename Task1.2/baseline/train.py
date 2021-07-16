@@ -1,4 +1,4 @@
-"""Training file for SMP-CAIL2020-Argmine.
+"""Training file for SMP-CAIL2021-ArgumentationUnderstanding Task1.1.
 
 Author: Yixu GAO yxgao19@fudan.edu.cn
 
@@ -6,8 +6,9 @@ Usage:
     python -m torch.distributed.launch train.py \
         --config_file 'config/bert_config.json'
     CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch train.py \
-        --config_file 'config/rnn_config.json'
+        --config_file 'config/bert_config.json'
 """
+
 from typing import Dict
 import argparse
 import json
@@ -26,19 +27,12 @@ from transformers.optimization import (
 
 from data import Data
 from evaluate import evaluate, calculate_accuracy_f1, get_labels_from_file
-from model import BertForClassification, RnnForSentencePairClassification
+from model import BertForClassification
 from utils import get_csv_logger, get_path
-from vocab import build_vocab
-
-
-MODEL_MAP = {
-    'bert': BertForClassification,
-    'rnn': RnnForSentencePairClassification
-}
 
 
 class Trainer:
-    """Trainer for SMP-CAIL2020-Argmine.
+    """Trainer for SMP-CAIL2021-ArgumentationUnderstanding Task1.1.
 
 
     """
@@ -53,7 +47,7 @@ class Trainer:
             device: torch.device('cuda') or torch.device('cpu')
             config:
                 config.experiment_name: experiment name
-                config.model_type: 'bert' or 'rnn'
+                config.model_type: 'bert'
                 config.lr: learning rate for optimizer
                 config.num_epoch: epoch number
                 config.num_warmup_steps: warm-up steps number
@@ -77,38 +71,31 @@ class Trainer:
         Returns:
             optimizer
         """
-        if self.config.model_type == 'bert':
-            no_decay = ['bias', 'gamma', 'beta']
-            optimizer_parameters = [
+        no_decay = ['bias', 'gamma', 'beta']
+        optimizer_parameters = [
                 {'params': [p for n, p in self.model.named_parameters()
                             if not any(nd in n for nd in no_decay)],
                  'weight_decay_rate': 0.01},
                 {'params': [p for n, p in self.model.named_parameters()
                             if any(nd in n for nd in no_decay)],
                  'weight_decay_rate': 0.0}]
-            optimizer = AdamW(
+        optimizer = AdamW(
                 optimizer_parameters,
                 lr=self.config.lr,
                 betas=(0.9, 0.999),
                 weight_decay=1e-8,
                 correct_bias=False)
-        else:  # rnn
-            optimizer = Adam(self.model.parameters(), lr=self.config.lr)
         return optimizer
 
     def _get_scheduler(self):
         """Get scheduler for different models.
-
         Returns:
             scheduler
         """
-        if self.config.model_type == 'bert':
-            scheduler = get_linear_schedule_with_warmup(
+        scheduler = get_linear_schedule_with_warmup(
                 self.optimizer,
                 num_warmup_steps=self.config.num_warmup_steps,
                 num_training_steps=self.config.num_training_steps)
-        else:  # rnn
-            scheduler = get_constant_schedule(self.optimizer)
         return scheduler
 
     def _evaluate_for_train_valid(self):
@@ -148,8 +135,8 @@ class Trainer:
         train_acc, train_f1, valid_acc, valid_f1 = results
         # Update tqdm description for command line
         tqdm_obj.set_description(
-            '\n\nEpoch: {:d}, train_acc: {:.6f}, train_f1: {:.6f}, '
-            'valid_acc: {:.6f}, valid_f1: {:.6f}, \n\n'.format(
+            'Epoch: {:d}, train_acc: {:.6f}, train_f1: {:.6f}, '
+            'valid_acc: {:.6f}, valid_f1: {:.6f}, '.format(
                 epoch, train_acc, train_f1, valid_acc, valid_f1))
         # Logging
         logger.info(','.join([str(epoch)] + [str(s) for s in results]))
@@ -222,9 +209,7 @@ def main(config_file='config/bert_config.json'):
         config = json.load(fin, object_hook=lambda d: SimpleNamespace(**d))
     get_path(os.path.join(config.model_path, config.experiment_name))
     get_path(config.log_path)
-    if config.model_type == 'rnn':  # build vocab for rnn
-        build_vocab(file_in=config.all_train_file_path,
-                    file_out=os.path.join(config.model_path, 'vocab.txt'))
+
     # 1. Load data
     data = Data(vocab_file=os.path.join(config.model_path, 'vocab.txt'),
                 max_seq_len=config.max_seq_len,
@@ -248,7 +233,7 @@ def main(config_file='config/bert_config.json'):
         'valid_valid': DataLoader(
             valid_set_valid, batch_size=config.batch_size, shuffle=False)}
     # 2. Build model
-    model = MODEL_MAP[config.model_type](config)
+    model = BertForClassification(config)
     model.to(device)
     if torch.cuda.is_available():
         model = torch.nn.parallel.DistributedDataParallel(

@@ -4,8 +4,8 @@
   "model_path": "model/bert/",
   "log_path": "log/",
 
-  "train_file_path": "data/haishi.train.csv",
-  "valid_file_path": "data/haishi.test.csv",
+  "train_file_path": "data/train.csv",
+  "valid_file_path": "data/valid.csv",
 
   "batch_size": 24,
 
@@ -14,7 +14,7 @@
   "num_classes": 2,
   "dropout": 0.01,
 
-  "lr": 1e-5,
+  "lr": 5e-5,
   "num_epoch": 10,
   "num_warmup_steps": 2000,
   "gradient_accumulation_steps": 1,
