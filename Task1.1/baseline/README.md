@@ -96,7 +96,7 @@ python -m torch.distributed.launch train.py --config_file 'config/bert_config.js
 ├── config
 │   └── bert_config.json
 ├── data
-│   ├── SMP-CAIL2020-train.csv
+│   ├── SMP-CAIL2021-train.csv
 │   ├── train.csv
 │   └── valid.csv
 ├── log
