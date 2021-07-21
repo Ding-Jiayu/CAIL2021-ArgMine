@@ -31,7 +31,7 @@ QQ群：
     <br/>``answer``： 辩方正确论点
 
 3. ``SMP-CAIL2021-crossdomain-text-test1.csv``：同下发数据中的``SMP-CAIL2021-text-train.csv``格式完全一致；
-4. ``SMP-CAIL2021-crossdomain-test1.csv``：同下发数据中的``SMP-CAIL2021-train.csv``格式基本一致，包含了815对裁判文书中的互动论点对，但缺少选手``answer``维度数据。
+4. ``SMP-CAIL2021-crossdomain-test1.csv``：同下发数据中的``SMP-CAIL2021-train.csv``格式基本一致，包含了302对裁判文书中的互动论点对，但缺少选手``answer``维度数据。
 
 ## 提交的文件格式及组织形式
 
