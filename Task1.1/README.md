@@ -62,167 +62,114 @@ QQ群：
 
 | 软件名称 | 版本号 |
 | -------- | :----- |
-| python   | 3.6.6  |
+| python   | 3.6.9  |
 | g++      | 5.4.0  |
 | gcc      | 5.4.0  |
 
 python库的环境列表：
 
 ```
-Package                 Version        Status
------------------------ -------------- ----------------------
-Cython          		- 0.29         - active
-Jinja2          		- 2.10         - active
-Keras-Applications 		- 1.0.6        - active
-Keras-Preprocessing 		- 1.0.5        - active
-Keras           		- 2.2.4        - active
-Mako            		- 1.0.7        - active
-Markdown        		- 3.0.1        - active
-MarkupSafe      		- 1.0          - active
-Pillow          		- 5.3.0        - non-active
-Pillow          		- 5.4.1        - active
-PyWavelets      		- 1.0.1        - active
-PyYAML          		- 3.13         - non-active
-PyYAML          		- 3.13         - non-active
-PyYAML          		- 3.13         - active
-PyYAML          		- 3.13         - active
-Pygments        		- 2.2.0        - active
-Send2Trash      		- 1.5.0        - active
-Theano          		- 1.0.3+2.g3e47d39ac.dirty - active
-Werkzeug        		- 0.14.1       - active
-absl-py         		- 0.6.1        - active
-astor           		- 0.7.1        - active
-backcall        		- 0.1.0        - active
-bleach          		- 3.0.2        - active
-certifi         		- 2018.10.15   - active
-cffi            		- 1.11.5       - non-active
-cffi            		- 1.12.1       - active
-chainer         		- 4.5.0        - active
-chardet         		- 3.0.4        - active
-cloudpickle     		- 0.6.1        - non-active
-cloudpickle     		- 0.8.0        - active
-cntk-gpu        		- 2.6          - active
-cycler          		- 0.10.0       - non-active
-cycler          		- 0.10.0       - non-active
-cycler          		- 0.10.0       - active
-cycler          		- 0.10.0       - active
-cytoolz         		- 0.9.0.1      - active
-dask            		- 0.20.0       - non-active
-dask            		- 1.1.2        - active
-decorator       		- 4.3.0        - active
-entrypoints     		- 0.2.3        - active
-filelock        		- 3.0.10       - active
-gast            		- 0.2.0        - active
-get             		- 1.0.3        - active
-graphviz        		- 0.8.4        - active
-grpcio          		- 1.16.1       - active
-h5py            		- 2.8.0        - non-active
-h5py            		- 2.8.0        - non-active
-h5py            		- 2.8.0        - active
-h5py            		- 2.8.0        - active
-idna            		- 2.6          - active
-imageio         		- 2.5.0        - active
-ipykernel       		- 5.1.0        - active
-ipython_genutils 		- 0.2.0        - active
-ipython         		- 7.1.1        - active
-ipywidgets      		- 7.4.2        - active
-jedi            		- 0.13.1       - active
-jsonschema      		- 2.6.0        - active
-jupyter-client  		- 5.2.3        - active
-jupyter-console 		- 6.0.0        - active
-jupyter-core    		- 4.4.0        - active
-jupyter         		- 1.0.0        - active
-kiwisolver      		- 1.0.1        - non-active
-kiwisolver      		- 1.0.1        - non-active
-kiwisolver      		- 1.0.1        - active
-kiwisolver      		- 1.0.1        - active
-leveldb         		- 0.20         - active
-lightgbm        		- 2.2.1        - active
-matplotlib      		- 3.0.0        - non-active
-matplotlib      		- 3.0.2        - active
-mistune         		- 0.8.4        - active
-mkl-fft         		- 1.0.10       - active
-mkl-random      		- 1.0.2        - active
-mxnet-cu90      		- 1.3.0.post0  - active
-nbconvert       		- 5.3.1        - active
-nbformat        		- 4.4.0        - active
-networkx        		- 2.2          - non-active
-networkx        		- 2.2          - non-active
-networkx        		- 2.2          - active
-networkx        		- 2.2          - active
-nltk            		- 3.4.5        - active
-notebook        		- 5.6.0        - active
-numpy           		- 1.15.4       - active
-olefile         		- 0.46         - active
-opencv-python   		- 3.4.3.18     - active
-pandas          		- 0.23.4       - non-active
-pandas          		- 0.24.1       - active
-pandocfilters   		- 1.4.2        - active
-parso           		- 0.3.1        - active
-pexpect         		- 4.6.0        - active
-pickleshare     		- 0.7.5        - active
-pip             		- 18.1         - active
-post            		- 1.0.2        - active
-prometheus-client 		- 0.4.2        - active
-prompt-toolkit  		- 2.0.7        - active
-protobuf        		- 3.6.1        - active
-ptyprocess      		- 0.6.0        - active
-public          		- 2.0.1        - active
-pycorenlp       		- 0.3.0        - active
-pycparser       		- 2.19         - non-active
-pycparser       		- 2.19         - non-active
-pycparser       		- 2.19         - active
-pycparser       		- 2.19         - active
-pydot           		- 1.2.4        - active
-pygpu           		- 0.7.6        - active
-pyparsing       		- 2.2.2        - non-active
-pyparsing       		- 2.3.1        - active
-python-dateutil 		- 2.7.5        - active
-python-gflags   		- 3.1.2        - active
-pytz            		- 2018.5       - non-active
-pytz            		- 2018.9       - active
-pyzmq           		- 17.1.2       - active
-qtconsole       		- 4.4.2        - active
-query-string    		- 1.0.2        - active
-request         		- 1.0.2        - active
-requests        		- 2.18.4       - active
-scikit-image    		- 0.14.1       - non-active
-scikit-image    		- 0.14.1       - non-active
-scikit-image    		- 0.14.1       - active
-scikit-image    		- 0.14.1       - active
-scikit-learn    		- 0.20.0       - active
-scipy           		- 1.2.1        - active
-setuptools      		- 40.5.0       - active
-six             		- 1.11.0       - active
-sklearn         		- 0.0          - active
-tensorboard     		- 1.12.0       - active
-tensorflow-gpu  		- 1.12.0       - active
-termcolor       		- 1.1.0        - active
-terminado       		- 0.8.1        - active
-testpath        		- 0.4.2        - active
-tflearn         		- 0.3.2        - active
-toolz           		- 0.9.0        - non-active
-toolz           		- 0.9.0        - non-active
-toolz           		- 0.9.0        - active
-toolz           		- 0.9.0        - active
-torch           		- 0.4.1        - non-active
-torch           		- 1.0.0        - active
-torchfile       		- 0.1.0        - active
-torchnet        		- 0.0.4        - active
-torchvision     		- 0.2.1        - non-active
-tornado         		- 5.1.1        - active
-tqdm            		- 4.28.1       - active
-traitlets       		- 4.3.2        - active
-urllib3         		- 1.22         - active
-visdom          		- 0.1.8.5      - active
-wcwidth         		- 0.1.7        - active
-webencodings    		- 0.5.1        - active
-websocket-client 		- 0.53.0       - active
-wheel           		- 0.32.2       - active
-widgetsnbextension 		- 3.4.2        - active
-xgboost         		- 0.80         - active
-yolk            		- 0.4.3        - active
-yolk3k          		- 0.9          - active
+Package                Version             
+---------------------- --------------------
+attrs                  19.3.0              
+Automat                0.8.0               
+backcall               0.2.0               
+blinker                1.4                 
+certifi                2019.11.28          
+chardet                3.0.4               
+click                  8.0.1               
+cloud-init             20.3                
+colorama               0.4.3               
+command-not-found      0.3                 
+configobj              5.0.6               
+constantly             15.1.0              
+cryptography           2.8                 
+dbus-python            1.2.16              
+decorator              4.4.2               
+distro                 1.4.0               
+distro-info            0.23ubuntu1         
+entrypoints            0.3                 
+Flask                  2.0.1               
+future                 0.18.2              
+gevent                 21.1.2              
+greenlet               1.1.0               
+gunicorn               20.1.0              
+httplib2               0.14.0              
+hyperlink              19.0.0              
+idna                   2.8                 
+importlib-metadata     1.5.0               
+incremental            16.10.1             
+ipython                7.18.1              
+ipython-genutils       0.2.0               
+itsdangerous           2.0.1               
+jedi                   0.17.2              
+Jinja2                 3.0.1               
+joblib                 1.0.1               
+jsonpatch              1.22                
+jsonpointer            2.0                 
+jsonschema             3.2.0               
+keyring                18.0.1              
+language-selector      0.1                 
+launchpadlib           1.10.13             
+lazr.restfulclient     0.14.2              
+lazr.uri               1.0.3               
+MarkupSafe             2.0.1               
+more-itertools         4.2.0               
+netifaces              0.10.4              
+numpy                  1.19.2              
+oauthlib               3.1.0               
+pandas                 1.3.0               
+parso                  0.7.1               
+pexpect                4.6.0               
+pickleshare            0.7.5               
+pip                    20.0.2              
+prettytable            0.7.2               
+prompt-toolkit         3.0.8               
+pyasn1                 0.4.2               
+pyasn1-modules         0.2.1               
+Pygments               2.7.1               
+PyGObject              3.36.0              
+PyHamcrest             1.9.0               
+PyJWT                  1.7.1               
+pymacaroons            0.13.0              
+PyNaCl                 1.3.0               
+pyOpenSSL              19.0.0              
+pyrsistent             0.15.5              
+pyserial               3.4                 
+python-apt             2.0.0+ubuntu0.20.4.3
+python-dateutil        2.8.2               
+python-debian          0.1.36ubuntu1       
+pytz                   2021.1              
+PyYAML                 5.3.1               
+requests               2.22.0              
+requests-unixsocket    0.2.0               
+scikit-learn           0.24.2              
+scipy                  1.7.0               
+SecretStorage          2.3.1               
+service-identity       18.1.0              
+setuptools             45.2.0              
+simplejson             3.16.0              
+six                    1.14.0              
+sklearn                0.0                 
+sos                    4.0                 
+ssh-import-id          5.10                
+systemd-python         234                 
+threadpoolctl          2.2.0               
+torch                  1.6.0               
+tqdm                   4.50.2              
+traitlets              5.0.5               
+Twisted                18.9.0              
+ubuntu-advantage-tools 20.3                
+ufw                    0.36                
+unattended-upgrades    0.1                 
+urllib3                1.25.8              
+wadllib                1.3.3               
+wcwidth                0.2.5               
+Werkzeug               2.0.1               
+wheel                  0.34.2              
+zipp                   1.0.0               
+zope.event             4.5.0               
+zope.interface         4.7.1 
 ```
 
 等待补全中
