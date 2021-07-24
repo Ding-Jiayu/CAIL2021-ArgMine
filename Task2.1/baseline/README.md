@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 数据集下载请访问比赛[主页](http://cail.cipsc.org.cn/)。
 
-本项目中只使用了 `task_2_1.json`： 包含了168篇裁判文书数据。分别包含以下维度：
+本项目中只使用了 `SMP-CAIL2021-focus_recognition-train.json`： 包含了168篇裁判文书数据。分别包含以下维度：
 
   - `文书ID`： 裁判文书id
   - `诉称段`： 裁判文书的诉称段内容
@@ -52,7 +52,7 @@ pip install -r requirements.txt
 ```
 ├── data
 │   └── raw_data
-│       └── task_2_1.json
+│       └── SMP-CAIL2021-focus_recognition-train.json
 ├── step1_model
 │   ├── bert
 │   │   ├── __init__.py
@@ -92,7 +92,7 @@ pip install -r requirements.txt
 根据原始数据集，划分第一步模型以及全流程的的训练集、验证集和标签等文件：
 
 ```
-python prepare.py   --src_path "./data/raw_data/task_2_1.json" \
+python prepare.py   --src_path "./data/raw_data/SMP-CAIL2021-focus_recognition-train.json" \
                     --single_file_train_dataset_path "data/single_file_data/train_data.txt" \
                     --single_file_test_dataset_path "data/single_file_data/test_data.txt" \
                     --step1_train_data_path "data/step1_data/train_data.txt" \
@@ -148,7 +148,7 @@ python model_train.py    --train_data_path "../data/step2_data/train_data.txt" \
 ```
 ├── data
 │   ├── raw_data
-│   │   └── task_2_1.json
+│   │   └── SMP-CAIL2021-focus_recognition-train.json
 │   ├── single_file_data
 │   │   │   ├── test_data.txt
 │   │   │   └── train_data.txt
