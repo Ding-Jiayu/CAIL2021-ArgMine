@@ -129,6 +129,29 @@ def raw_data_convert_to_step1_data(dataset):
     return trainable_dataset
 
 
+def pos_neg_balance(dataset):
+    negative_dataset, positive_dataset = [], []
+
+    for data in dataset:
+        label = data[0]
+        if label == 'none':
+            negative_dataset.append(data)
+        else:
+            positive_dataset.append(data)
+    positive_dataset_size = len(positive_dataset)
+    negative_dataset_size = len(negative_dataset)
+    if positive_dataset_size < negative_dataset_size:
+        nega_samples = random.sample(negative_dataset, positive_dataset_size)
+        posi_samples = positive_dataset
+    else:
+        posi_samples = random.sample(positive_dataset, negative_dataset_size)
+        nega_samples = negative_dataset
+
+    dataset = posi_samples + nega_samples
+    random.shuffle(dataset)
+    return dataset
+
+
 def create_step1_data(train_dataset, test_dataset, step1_train_data_path, step1_test_data_path, label_list_path):
     step1_train_data = raw_data_convert_to_step1_data(train_dataset)
     step1_test_data = raw_data_convert_to_step1_data(test_dataset)
@@ -140,7 +163,9 @@ def create_step1_data(train_dataset, test_dataset, step1_train_data_path, step1_
             if label != 'none' and label not in label_list:
                 label_list.append(label)
 
-    matrix_to_txt(step1_train_data_path, step1_train_data, sep="\t")
+    step1_train_data_after_balance = pos_neg_balance(step1_train_data)
+
+    matrix_to_txt(step1_train_data_path, step1_train_data_after_balance, sep="\t")
     matrix_to_txt(step1_test_data_path, step1_test_data, sep="\t")
     list_to_txt(label_list_path, label_list)
 
@@ -154,7 +179,7 @@ def create_single_file_data(train_dataset, test_dataset, single_file_train_datas
     matrix_to_txt(single_file_test_dataset_path, single_file_test_dataset)
 
 
-def main(src_path=r"./data/raw_data/task_2_1.json",
+def main(src_path=r"./data/raw_data/SMP-CAIL2021-focus_recognition-train.json",
          single_file_train_dataset_path=r"data/single_file_data/train_data.txt",
          single_file_test_dataset_path=r"data/single_file_data/test_data.txt",
          step1_train_data_path=r"data/step1_data/train_data.txt",
