@@ -123,7 +123,7 @@ python prepare_after_step1.py   --train_dataset_path "data/single_file_data/trai
                                 --bert_config_file './step1_model/BERT_BASE_DIR/bert_config.json' \
                                 --ckpt_dir './step1_model/output' \
                                 --max_seq_len 500 \
-                                --n_classes 133
+                                --n_classes 130
 ```
 
 #### 1.3 step2_model训练(随机森林)
@@ -208,7 +208,7 @@ python pipeline_predict.py  --label_list_path "./data/step2_data/labels.txt" \
                             --bert_config_file './step1_model/BERT_BASE_DIR/bert_config.json' \
                             --ckpt_dir './step1_model/output' \
                             --max_seq_len 500 \
-                            --n_classes 133
+                            --n_classes 130
 ```
 
 运行上述命令将会在`data/output`下生成`criterion.txt`和`prediction.txt`，分别代表`data/single_file_data/test_data.txt`的标准标签和基线系统预测的标签。
